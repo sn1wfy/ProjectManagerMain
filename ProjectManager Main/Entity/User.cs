@@ -1,4 +1,5 @@
-﻿using ProjectManager_Main.ViewModels.User;
+﻿using ProjectManager_Main.ViewModels.Admin;
+using ProjectManager_Main.ViewModels.User;
 
 namespace ProjectManager_Main.Entity
 {
@@ -30,6 +31,16 @@ namespace ProjectManager_Main.Entity
             LastName = model.LastName;
             Email = model.Email;
             IsAdmin = false;
+        }
+        public User(CreateUserVM model)
+        {
+            Id = Guid.NewGuid();
+            Username = model.Username;
+            Password = model.Password;
+            FirstName = model.FirstName;
+            LastName = model.LastName;
+            Email = model.Email;
+            IsAdmin = model.IsAdmin;
         }
     }
 

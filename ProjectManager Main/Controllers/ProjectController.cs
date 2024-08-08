@@ -95,7 +95,7 @@ namespace ProjectManager_Main.Controllers
             context.Projects.Remove(project);
             context.SaveChanges();
 
-            return RedirectToAction("Index", "Home"); 
+            return RedirectToAction("Index", "Project"); 
         }
 
 
@@ -169,7 +169,7 @@ namespace ProjectManager_Main.Controllers
             project.Name = model.Name;
             project.Description = model.Description;
             context.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Project");
         }
 
 
