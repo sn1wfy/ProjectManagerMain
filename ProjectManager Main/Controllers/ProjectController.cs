@@ -118,8 +118,10 @@ namespace ProjectManager_Main.Controllers
                 Id = project.Id,
                 Name = project.Name,
                 Description = project.Description,
-                Author = context.Users.Find(project.OwnerId).Username
+                Author = context.Users.Find(project.OwnerId).Username,
+                Tasks = context.Tasks.Where(x => x.ProjectId == id).ToList()
             };
+            
             return View(model);
 
         }
@@ -138,13 +140,13 @@ namespace ProjectManager_Main.Controllers
             {
                 return RedirectToAction("Index");
             }
-            var model = new ProjectDetailsVM()
-            {
-                Id = project.Id,
-                Name = project.Name,
-                Description = project.Description,
+            var model = new EditProjectVM();
+
+            model.Id = project.Id;
+            model.Name = project.Name;
+            model.Description = project.Description;
                 
-            };
+            
             return View(model);
             
 

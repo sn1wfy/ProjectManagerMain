@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProjectManager_Main.ViewModels.ProjectsVM
+namespace ProjectManager_Main.ViewModels.Tasks
 {
-    public class ProjectDetailsVM
+    public class TaskDetailsVM
     {
         public Guid Id { get; set; }
+        public Guid ProjectId { get; set; }
 
         [Display(Name = "Author: ")]
         public string Author { get; set; }
@@ -15,6 +16,9 @@ namespace ProjectManager_Main.ViewModels.ProjectsVM
         [Display(Name = "Description: ")]
         public string Description { get; set; }
 
-        public List<Entity.Task> Tasks { get; set; }
+        [Display(Name = "State")]
+        public bool State {  get; set; }
+
+        //public List<Entity.Task> Tasks { get; set; }
     }
 }

@@ -8,10 +8,13 @@ namespace ProjectManager_Main.SQLConnection
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<Entity.Task> Tasks { get; set; }
+
         public Context() : base("Server = localhost\\sqlexpress; Database=ProjectManagerMain;Trusted_Connection=True;")
         {
             Users = this.Set<User>();
             Projects = this.Set<Project>();
+            Tasks = this.Set<Entity.Task>();
         }
     }
 }

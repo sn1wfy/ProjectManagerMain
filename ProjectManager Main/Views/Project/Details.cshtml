@@ -18,7 +18,7 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Description) 
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
@@ -28,4 +28,52 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
+</div>
+<div style="margin-top:100px;">
+    <h4>Tasks</h4>
+    <hr /> 
+    <p> 
+        <a asp-action="Create" asp-controller="Task"asp-route-id="@Model.Id">Create New Task</a>
+    </p>
+    <table class="table">
+        <thead> 
+            <tr>
+
+                <th>
+                   Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                 State
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Tasks)
+            {
+                <tr>
+
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.State
+                    </td>
+
+                    <td>
+                        <a href="/Task/Edit?id=@item.Id">Edit</a>
+                        <a href="/Task/Details?id=@item.Id">Details</a>
+                        <a href="/Task/Delete?id=@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 </div>
