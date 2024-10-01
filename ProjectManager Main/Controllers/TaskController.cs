@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using ProjectManager_Main.Entity;
+using ProjectManager_Main.Repository;
 using ProjectManager_Main.SQLConnection;
 using ProjectManager_Main.Tools;
 using ProjectManager_Main.ViewModels.ProjectsVM;
@@ -90,12 +91,14 @@ namespace ProjectManager_Main.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult DeleteTask(Guid Id)
+        public async Task<IActionResult> DeleteTask(Guid Id)
         {
-            Entity.Task task = context.Tasks.Find(Id);
-            context.Tasks.Remove(task);
-            context.SaveChanges();
-            return RedirectToAction("Details", "Project", new {id = task.ProjectId});
+            
+            CommonRepository commonRepository = new CommonRepository();
+            
+            await commonRepository.DeleteTask(Id);
+
+            return RedirectToAction("Details", "Project", new {id = context.Tasks.Find(Id).ProjectId});
         }
         public IActionResult Details(Guid id)
         {

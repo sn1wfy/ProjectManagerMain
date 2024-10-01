@@ -6,6 +6,7 @@ using ProjectManager_Main.Tools;
 using ProjectManager_Main.ViewModels.ProjectsVM;
 using ProjectManager_Main.ViewModels.Admin;
 using Microsoft.CodeAnalysis;
+using ProjectManager_Main.Repository;
 
 namespace ProjectManager_Main.Controllers
 {
@@ -77,7 +78,7 @@ namespace ProjectManager_Main.Controllers
             return View(userDetailsVM);
         }
         [HttpPost]
-        public IActionResult DeleteUser(Guid Id)
+        public async Task<IActionResult> DeleteUser(Guid Id)
         {
             if (AuthenticationService.LoggedUser == null || !AuthenticationService.LoggedUser.IsAdmin)
             {
@@ -87,12 +88,9 @@ namespace ProjectManager_Main.Controllers
             {
                 return RedirectToAction("Index", "Admin");
             }
-            User user = context.Users.Find(Id);
-           
-            context.Users.Remove(user);
-            //context.Projects.Remove(user);
-            //---------^^ TOVA SE SMENQ-------//
-            context.SaveChanges();
+            
+           CommonRepository commonRepository = new CommonRepository();
+           await commonRepository.DeleteUser(Id);
 
             return RedirectToAction("Index", "Admin");
             //----------------------------------^^ TOVA SE SMENQ SUSHTO-------//

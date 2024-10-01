@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManager_Main.Entity;
+using ProjectManager_Main.Repository;
 using ProjectManager_Main.SQLConnection;
 using ProjectManager_Main.Tools;
 using ProjectManager_Main.ViewModels.ProjectsVM;
@@ -81,21 +82,17 @@ namespace ProjectManager_Main.Controllers
             return View(projectDetailsVM);
         }
         [HttpPost]
-        public IActionResult DeleteProject(Guid Id)
+        public async Task<IActionResult> DeleteProject(Guid Id)
         {
             if (AuthenticationService.LoggedUser == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            Project project = context.Projects.Find(Id);
-            if (project.OwnerId != AuthenticationService.LoggedUser.Id)
-            {
-                return RedirectToAction("Index", "Project");
-            }
-            context.Projects.Remove(project);
-            context.SaveChanges();
+            
+            CommonRepository commonrepository = new CommonRepository();
+            await commonrepository.DeleteProject(Id);
+            return RedirectToAction("Index", "Project");
 
-            return RedirectToAction("Index", "Project"); 
         }
 
 
