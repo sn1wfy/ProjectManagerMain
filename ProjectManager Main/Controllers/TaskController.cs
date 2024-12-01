@@ -31,7 +31,7 @@ namespace ProjectManager_Main.Controllers
             return View(model);
         }
         [HttpPost]
-
+        
         public IActionResult Create(CreateTaskVM model)
         {
             if (AuthenticationService.LoggedUser == null || model.ProjectId == Guid.Empty || context.Projects.Find(model.ProjectId).OwnerId != AuthenticationService.LoggedUser.Id)
@@ -111,6 +111,7 @@ namespace ProjectManager_Main.Controllers
             model.State = model.State;
             model.ProjectId = task.ProjectId;
             model.Author = context.Users.Find(context.Projects.Find(task.ProjectId).OwnerId).Username;
+            model.Comments = context.Comments.Where(x=>x.TaskId == model.Id).ToList();
             return View(model);
         }
        

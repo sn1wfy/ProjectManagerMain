@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProjectManager_Main.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManager_Main.ViewModels.Tasks
 {
@@ -19,6 +20,6 @@ namespace ProjectManager_Main.ViewModels.Tasks
         [Display(Name = "State")]
         public bool State {  get; set; }
 
-        //public List<Entity.Task> Tasks { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }
